@@ -1,0 +1,28 @@
+{
+  "name": "Schipiti",
+  "version": "0.1.0",
+  "description": "ChatGPT+ that does not feel out of place",
+  "manifest_version": 3,
+  "author": "Waradu",
+  "content_scripts": [
+    {
+      "js": [
+        "./inject/script/script.js"
+      ],
+      "css": [
+        "./inject/style/style.css",
+        "./inject/style/toast.css"
+      ],
+      "matches": [
+        "https://chatgpt.com/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "init.js"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
+}
