@@ -11276,50 +11276,7 @@ var Nav = /** @class */ (function () {
         this.group.appendChild(div1);
         if (pinned_links.length > 0) {
             pinned_links.forEach(function (link) {
-                var _a;
-                var li = document.createElement("li");
-                li.classList.add("relative");
-                li.style.opacity = "1";
-                li.style.height = "auto";
-                var pinned_div1 = document.createElement("div");
-                pinned_div1.classList.add("group", "relative", "rounded-lg", "active:opacity-90", "hover:bg-token-sidebar-surface-secondary");
-                var a = document.createElement("a");
-                a.href = link.link;
-                a.classList.add("flex", "items-center", "gap-2", "p-2");
-                var pinned_div2 = document.createElement("div");
-                pinned_div2.classList.add("relative", "grow", "overflow-hidden", "whitespace-nowrap");
-                pinned_div2.setAttribute("dir", "auto");
-                pinned_div2.innerHTML = link.name;
-                var pinned_div3 = document.createElement("div");
-                pinned_div3.classList.add("absolute", "bottom-0", "top-0", "to-transparent", "ltr:right-0", "ltr:bg-gradient-to-l", "rtl:left-0", "rtl:bg-gradient-to-r", "from-token-sidebar-surface-primary", "group-hover:from-token-sidebar-surface-secondary", "w-8", "group-hover:w-20", "group-hover:from-60%", "juice:group-hover:w-10");
-                pinned_div2.appendChild(pinned_div3);
-                a.appendChild(pinned_div2);
-                pinned_div1.appendChild(a);
-                var pinned_div4 = document.createElement("div");
-                pinned_div4.classList.add("absolute", "bottom-0", "top-0", "items-center", "gap-1.5", "pr-2", "ltr:right-0", "rtl:left-0", "hidden", "group-hover:flex");
-                var span = document.createElement("span");
-                span.setAttribute("data-state", "closed");
-                var button = document.createElement("button");
-                button.classList.add("flex", "items-center", "justify-center", "text-token-text-primary", "transition", "hover:text-token-text-secondary", "radix-state-open:text-token-text-secondary", "juice:text-token-text-secondary", "juice:hover:text-token-text-primary", "no_event_listener");
-                button.type = "button";
-                button.title = "Click to remove pinned";
-                button.id = "radix-:r32:";
-                button.setAttribute("aria-haspopup", "menu");
-                button.setAttribute("aria-expanded", "false");
-                button.setAttribute("data-state", "closed");
-                button.innerHTML = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getSvg)(true);
-                span.appendChild(button);
-                pinned_div4.appendChild(span);
-                pinned_div1.appendChild(pinned_div4);
-                li.appendChild(pinned_div1);
-                (_a = _this.ol) === null || _a === void 0 ? void 0 : _a.appendChild(li);
-                button.addEventListener("click", function () {
-                    chrome.storage.sync.get(["pinned"]).then(function (result) {
-                        pinned_links = result.pinned.filter(function (l) { return l.link !== link.link; });
-                        chrome.storage.sync.set({ pinned: pinned_links });
-                        li.remove();
-                    });
-                });
+                _this.add(link.link, link.name);
             });
         }
         else {
@@ -11336,7 +11293,199 @@ var Nav = /** @class */ (function () {
             return;
         this.group.style.display = "none";
     };
+    Nav.prototype.remove = function (link) {
+        if (!this.ol)
+            return;
+        this.ol.querySelectorAll("li").forEach(function (li) {
+            var a = li.querySelector("a");
+            if (a && a.href === link) {
+                li.remove();
+            }
+        });
+    };
+    Nav.prototype.add = function (link, name) {
+        var _a;
+        if (!this.ol)
+            return;
+        var li = document.createElement("li");
+        li.classList.add("relative");
+        li.style.opacity = "1";
+        li.style.height = "auto";
+        var pinned_div1 = document.createElement("div");
+        pinned_div1.classList.add("group", "relative", "rounded-lg", "active:opacity-90", "hover:bg-token-sidebar-surface-secondary");
+        var a = document.createElement("a");
+        a.href = link;
+        a.classList.add("flex", "items-center", "gap-2", "p-2");
+        var pinned_div2 = document.createElement("div");
+        pinned_div2.classList.add("relative", "grow", "overflow-hidden", "whitespace-nowrap");
+        pinned_div2.setAttribute("dir", "auto");
+        pinned_div2.innerHTML = name;
+        var pinned_div3 = document.createElement("div");
+        pinned_div3.classList.add("absolute", "bottom-0", "top-0", "to-transparent", "ltr:right-0", "ltr:bg-gradient-to-l", "rtl:left-0", "rtl:bg-gradient-to-r", "from-token-sidebar-surface-primary", "group-hover:from-token-sidebar-surface-secondary", "w-8", "group-hover:w-20", "group-hover:from-60%", "juice:group-hover:w-10");
+        pinned_div2.appendChild(pinned_div3);
+        a.appendChild(pinned_div2);
+        pinned_div1.appendChild(a);
+        var pinned_div4 = document.createElement("div");
+        pinned_div4.classList.add("absolute", "bottom-0", "top-0", "items-center", "gap-1.5", "pr-2", "ltr:right-0", "rtl:left-0", "hidden", "group-hover:flex");
+        var span = document.createElement("span");
+        span.setAttribute("data-state", "closed");
+        var button = document.createElement("button");
+        button.classList.add("flex", "items-center", "justify-center", "text-token-text-primary", "transition", "hover:text-token-text-secondary", "radix-state-open:text-token-text-secondary", "juice:text-token-text-secondary", "juice:hover:text-token-text-primary", "no_event_listener");
+        button.type = "button";
+        button.title = "Click to remove pinned";
+        button.id = "radix-:r32:";
+        button.setAttribute("aria-haspopup", "menu");
+        button.setAttribute("aria-expanded", "false");
+        button.setAttribute("data-state", "closed");
+        button.innerHTML = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getSvg)(true);
+        span.appendChild(button);
+        pinned_div4.appendChild(span);
+        pinned_div1.appendChild(pinned_div4);
+        li.appendChild(pinned_div1);
+        (_a = this.ol) === null || _a === void 0 ? void 0 : _a.appendChild(li);
+        button.addEventListener("click", function () {
+            chrome.storage.sync.get(["pinned"]).then(function (result) {
+                var pinned_links = result.pinned.filter(function (l) { return l.link !== link; });
+                chrome.storage.sync.set({ pinned: pinned_links });
+                li.remove();
+            });
+        });
+    };
     return Nav;
+}());
+
+
+
+/***/ }),
+
+/***/ "./script/observer.ts":
+/*!****************************!*\
+  !*** ./script/observer.ts ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Observer: () => (/* binding */ Observer)
+/* harmony export */ });
+/* harmony import */ var _html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./html */ "./script/html.ts");
+var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+
+var Observer = /** @class */ (function () {
+    function Observer(pinned_links, nav) {
+        var applyLinkFunctionality = function (item) {
+            if (!item) {
+                return;
+            }
+            var linkElement = item.querySelector("a");
+            if (!linkElement) {
+                return;
+            }
+            var link = linkElement.href;
+            var name = linkElement.querySelector('div[dir="auto"]').innerText;
+            var pinned = pinned_links.some(function (l) { return l.link === link; });
+            var waitForButton = function (item, callback, interval, timeout) {
+                if (interval === void 0) { interval = 100; }
+                if (timeout === void 0) { timeout = 5000; }
+                var startTime = Date.now();
+                var checkButton = function () {
+                    var menu = item.querySelector("button");
+                    if (menu) {
+                        if (menu.classList.contains("no_event_listener"))
+                            return;
+                        callback(menu);
+                    }
+                    else if (Date.now() - startTime < timeout) {
+                        setTimeout(checkButton, interval);
+                    }
+                    else {
+                        console.log("Button not found within timeout");
+                    }
+                };
+                checkButton();
+            };
+            waitForButton(item, function (menu) {
+                menu.addEventListener("click", function () {
+                    chrome.storage.sync.get(["pinned"]).then(function (result) {
+                        pinned = result.pinned.some(function (l) { return l.link === link; });
+                        var popup = document.querySelector('[role="menu"]');
+                        if (!popup) {
+                            return;
+                        }
+                        var pin = document.createElement("div");
+                        pin.setAttribute("role", "menuitem");
+                        pin.setAttribute("tabindex", "-1");
+                        pin.setAttribute("data-orientation", "vertical");
+                        pin.setAttribute("data-radix-collection-item", "");
+                        pin.classList.add("flex", "items-center", "m-1.5", "p-2.5", "text-sm", "cursor-pointer", "focus-visible:outline-0", "radix-disabled:pointer-events-none", "radix-disabled:opacity-50", "group", "relative", "hover:bg-[#f5f5f5]", "focus-visible:bg-[#f5f5f5]", "dark:hover:bg-token-main-surface-secondary", "dark:focus-visible:bg-token-main-surface-secondary", "rounded-md", "my-0", "px-3", "mx-2", "radix-state-open:bg-[#f5f5f5]", "dark:radix-state-open:bg-token-main-surface-secondary", "gap-2.5", "py-3");
+                        var innerDiv = document.createElement("div");
+                        innerDiv.classList.add("flex", "items-center", "justify-center", "text-token-text-secondary", "h-5", "w-5");
+                        innerDiv.innerHTML = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getSvg)(pinned);
+                        pin.appendChild(innerDiv);
+                        var textNode = document.createTextNode(pinned ? "Unpin" : "Pin");
+                        pin.appendChild(textNode);
+                        popup.insertBefore(pin, popup.firstChild);
+                        pin.addEventListener("click", function () {
+                            chrome.storage.sync.get(["pinned"]).then(function (result) {
+                                pinned_links = pinned
+                                    ? result.pinned.filter(function (l) { return l.link !== link; })
+                                    : __spreadArray(__spreadArray([], result.pinned, true), [{ link: link, name: name }], false);
+                                chrome.storage.sync.set({ pinned: pinned_links });
+                                pinned = !pinned;
+                                if (pinned) {
+                                    nav.add(link, name);
+                                }
+                                else {
+                                    nav.remove(link);
+                                }
+                                innerDiv.innerHTML = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getSvg)(pinned);
+                            });
+                        });
+                    });
+                });
+            });
+        };
+        // Create a MutationObserver to watch for new items
+        var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                mutation.addedNodes.forEach(function (node) {
+                    if (node.nodeType === 1 &&
+                        node instanceof HTMLElement &&
+                        node.matches("ol>li>.group:has(a)")) {
+                        applyLinkFunctionality(node);
+                    }
+                    if (node.nodeType === 1 &&
+                        node instanceof HTMLElement &&
+                        node.querySelectorAll) {
+                        var nestedItems = node.querySelectorAll("ol>li>.group:has(a)");
+                        nestedItems.forEach(function (nestedItem) {
+                            if (nestedItem instanceof HTMLElement) {
+                                applyLinkFunctionality(nestedItem);
+                            }
+                        });
+                    }
+                });
+            });
+        });
+        // Start observing the document for changes in child elements
+        observer.observe(document.body, { childList: true, subtree: true });
+        // Apply to existing items
+        document
+            .querySelectorAll("ol>li>.group:has(a)")
+            .forEach(function (item) {
+            applyLinkFunctionality(item);
+        });
+    }
+    return Observer;
 }());
 
 
@@ -11454,100 +11603,15 @@ var __webpack_exports__ = {};
   !*** ./script/script.ts ***!
   \**************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./html */ "./script/html.ts");
-/* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav */ "./script/nav.ts");
-var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
+/* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nav */ "./script/nav.ts");
+/* harmony import */ var _observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./observer */ "./script/observer.ts");
 
 
 chrome.storage.sync.get(["pinned"]).then(function (result) {
     var pinned_links = result.pinned;
     console.log(pinned_links);
-    var nav = new _nav__WEBPACK_IMPORTED_MODULE_1__.Nav(pinned_links);
-    var applyLinkFunctionality = function (item) {
-        var linkElement = item.querySelector("a");
-        var link = linkElement.href;
-        var name = linkElement.querySelector('div[dir="auto"]').innerText;
-        var pinned = pinned_links.some(function (l) { return l.link === link; });
-        var waitForButton = function (item, callback, interval, timeout) {
-            if (interval === void 0) { interval = 100; }
-            if (timeout === void 0) { timeout = 5000; }
-            var startTime = Date.now();
-            var checkButton = function () {
-                var menu = item.querySelector("button");
-                if (menu) {
-                    if (menu.classList.contains("no_event_listener"))
-                        return;
-                    callback(menu);
-                }
-                else if (Date.now() - startTime < timeout) {
-                    setTimeout(checkButton, interval);
-                }
-                else {
-                    console.log("Button not found within timeout");
-                }
-            };
-            checkButton();
-        };
-        waitForButton(item, function (menu) {
-            menu.addEventListener("click", function () {
-                var popup = document.querySelector('[role="menu"]');
-                var pin = document.createElement("div");
-                pin.setAttribute("role", "menuitem");
-                pin.setAttribute("tabindex", "-1");
-                pin.setAttribute("data-orientation", "vertical");
-                pin.setAttribute("data-radix-collection-item", "");
-                pin.classList.add("flex", "items-center", "m-1.5", "p-2.5", "text-sm", "cursor-pointer", "focus-visible:outline-0", "radix-disabled:pointer-events-none", "radix-disabled:opacity-50", "group", "relative", "hover:bg-[#f5f5f5]", "focus-visible:bg-[#f5f5f5]", "dark:hover:bg-token-main-surface-secondary", "dark:focus-visible:bg-token-main-surface-secondary", "rounded-md", "my-0", "px-3", "mx-2", "radix-state-open:bg-[#f5f5f5]", "dark:radix-state-open:bg-token-main-surface-secondary", "gap-2.5", "py-3");
-                var innerDiv = document.createElement("div");
-                innerDiv.classList.add("flex", "items-center", "justify-center", "text-token-text-secondary", "h-5", "w-5");
-                innerDiv.innerHTML = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getSvg)(pinned);
-                pin.appendChild(innerDiv);
-                var textNode = document.createTextNode(pinned ? "Unpin" : "Pin");
-                pin.appendChild(textNode);
-                popup.insertBefore(pin, popup.firstChild);
-                pin.addEventListener("click", function () {
-                    chrome.storage.sync.get(["pinned"]).then(function (result) {
-                        pinned_links = pinned
-                            ? result.pinned.filter(function (l) { return l.link !== link; })
-                            : __spreadArray(__spreadArray([], result.pinned, true), [{ link: link, name: name }], false);
-                        chrome.storage.sync.set({ pinned: pinned_links });
-                        pinned = !pinned;
-                        innerDiv.innerHTML = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getSvg)(pinned);
-                    });
-                });
-            });
-        });
-    };
-    // Create a MutationObserver to watch for new items
-    var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
-            mutation.addedNodes.forEach(function (node) {
-                if (node.nodeType === 1 && node.matches("ol>li>.group:has(a)")) {
-                    applyLinkFunctionality(node);
-                }
-                // Check for nested elements if the added node is not the target but contains it
-                if (node.nodeType === 1 && node.querySelectorAll) {
-                    var nestedItems = node.querySelectorAll("ol>li>.group:has(a)");
-                    nestedItems.forEach(function (nestedItem) {
-                        applyLinkFunctionality(nestedItem);
-                    });
-                }
-            });
-        });
-    });
-    // Start observing the document for changes in child elements
-    observer.observe(document.body, { childList: true, subtree: true });
-    // Apply to existing items
-    document.querySelectorAll("ol>li>.group:has(a)").forEach(function (item) {
-        applyLinkFunctionality(item);
-    });
+    var nav = new _nav__WEBPACK_IMPORTED_MODULE_0__.Nav(pinned_links);
+    var observer = new _observer__WEBPACK_IMPORTED_MODULE_1__.Observer(pinned_links, nav);
 });
 
 })();
