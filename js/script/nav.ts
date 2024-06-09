@@ -104,6 +104,8 @@ export class Nav {
   add(link: string, name: string) {
     if (!this.ol) return;
 
+    this.show();
+
     const li = document.createElement("li");
     li.classList.add("relative");
     li.style.opacity = "1";
@@ -204,6 +206,9 @@ export class Nav {
         const pinned_links = result.pinned.filter((l: Link) => l.link !== link);
         chrome.storage.sync.set({ pinned: pinned_links });
         li.remove();
+        if (pinned_links.length <= 0) {
+          this.hide();
+        }
       });
     });
   }

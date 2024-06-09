@@ -120,6 +120,9 @@ export class Observer {
                   nav.add(link, name);
                 } else {
                   nav.remove(link);
+                  if (pinned_links.length <= 0) {
+                    nav.hide();
+                  }
                 }
                 innerDiv.innerHTML = getSvg(pinned);
               });

@@ -11304,9 +11304,11 @@ var Nav = /** @class */ (function () {
         });
     };
     Nav.prototype.add = function (link, name) {
+        var _this = this;
         var _a;
         if (!this.ol)
             return;
+        this.show();
         var li = document.createElement("li");
         li.classList.add("relative");
         li.style.opacity = "1";
@@ -11348,6 +11350,9 @@ var Nav = /** @class */ (function () {
                 var pinned_links = result.pinned.filter(function (l) { return l.link !== link; });
                 chrome.storage.sync.set({ pinned: pinned_links });
                 li.remove();
+                if (pinned_links.length <= 0) {
+                    _this.hide();
+                }
             });
         });
     };
@@ -11446,6 +11451,9 @@ var Observer = /** @class */ (function () {
                                 }
                                 else {
                                     nav.remove(link);
+                                    if (pinned_links.length <= 0) {
+                                        nav.hide();
+                                    }
                                 }
                                 innerDiv.innerHTML = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getSvg)(pinned);
                             });
