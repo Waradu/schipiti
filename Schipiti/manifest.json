@@ -18,9 +18,6 @@
       ]
     }
   ],
-  "background": {
-    "service_worker": "init.js"
-  },
   "icons": {
     "96": "./assets/logo.png"
   },
