@@ -15,7 +15,8 @@
       ],
       "matches": [
         "https://chatgpt.com/*"
-      ]
+      ],
+      "run_at": "document_start"
     }
   ],
   "icons": {
@@ -23,6 +24,8 @@
   },
   "permissions": [
     "storage",
-    "tabs"
+    "tabs",
+    "activeTab",
+    "scripting"
   ]
 }

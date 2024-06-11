@@ -15,7 +15,18 @@
   background: #383838;
 }
 
+.wrdu_input:focus {
+  outline: none !important;
+}
+
 .wrdu_border {
   border-bottom: 1px solid #ffffff10;
   padding-bottom: 10px;
+}
+
+.wrdu_input {
+  width: 100%;
+  outline: 0px solid black !important;
+  border: 0px solid black !important;
+  background: transparent !important;
 }

@@ -1,9 +1,12 @@
 import { getSvg } from "./html";
 import { Nav } from "./nav";
+import { Search } from "./search";
 import { Link } from "./types";
 
 export class Observer {
-  constructor(pinned_links: Link[], nav: Nav) {
+  constructor(pinned_links: Link[], nav: Nav, index: Link[]) {
+    const search = new Search(index);
+
     const applyLinkFunctionality = (item: HTMLElement) => {
       if (!item) {
         return;
@@ -19,6 +22,13 @@ export class Observer {
       const name =
         linkElement.querySelector<HTMLElement>('div[dir="auto"]')!.innerText;
       var pinned = pinned_links.some((l) => l.link === link);
+
+      const indexItem: Link = {
+        name: name,
+        link: link.replace("https://chatgpt.com/c/", ""),
+      };
+
+      search.add(indexItem);
 
       const waitForButton = (
         item: HTMLElement,
@@ -133,7 +143,8 @@ export class Observer {
     };
 
     // Create a MutationObserver to watch for new items
-    const observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver(async (mutations) => {
+      var sync = false;
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
           if (
@@ -142,6 +153,7 @@ export class Observer {
             node.matches("ol>li>.group:has(a)")
           ) {
             applyLinkFunctionality(node);
+            sync = true;
           }
 
           if (
@@ -153,11 +165,16 @@ export class Observer {
             nestedItems.forEach((nestedItem) => {
               if (nestedItem instanceof HTMLElement) {
                 applyLinkFunctionality(nestedItem);
+                sync = true;
               }
             });
           }
         });
       });
+      console.log(sync);
+      if (sync) {
+        await search.sync();
+      }
     });
 
     // Start observing the document for changes in child elements

@@ -1,4 +1,4 @@
-import { getSvg } from "./html";
+import { getCustomChatItem, getSvg } from "./html";
 import toastr from "./toast";
 import { Link } from "./types";
 
@@ -21,6 +21,7 @@ export class Nav {
     if (!list) return;
 
     this.group = document.createElement("div");
+    this.group.classList.add("pinned");
 
     list.appendChild(this.group);
 
@@ -106,99 +107,8 @@ export class Nav {
 
     this.show();
 
-    const li = document.createElement("li");
-    li.classList.add("relative");
-    li.style.opacity = "1";
-    li.style.height = "auto";
+    const [li, button] = getCustomChatItem(true, link, name);
 
-    const pinned_div1 = document.createElement("div");
-    pinned_div1.classList.add(
-      "group",
-      "relative",
-      "rounded-lg",
-      "active:opacity-90",
-      "hover:bg-token-sidebar-surface-secondary"
-    );
-
-    const a = document.createElement("a");
-    a.href = link;
-    a.classList.add("flex", "items-center", "gap-2", "p-2");
-
-    const pinned_div2 = document.createElement("div");
-    pinned_div2.classList.add(
-      "relative",
-      "grow",
-      "overflow-hidden",
-      "whitespace-nowrap"
-    );
-    pinned_div2.setAttribute("dir", "auto");
-    pinned_div2.innerHTML = name;
-
-    const pinned_div3 = document.createElement("div");
-    pinned_div3.classList.add(
-      "absolute",
-      "bottom-0",
-      "top-0",
-      "to-transparent",
-      "ltr:right-0",
-      "ltr:bg-gradient-to-l",
-      "rtl:left-0",
-      "rtl:bg-gradient-to-r",
-      "from-token-sidebar-surface-primary",
-      "group-hover:from-token-sidebar-surface-secondary",
-      "w-8",
-      "group-hover:w-20",
-      "group-hover:from-60%",
-      "juice:group-hover:w-10"
-    );
-
-    pinned_div2.appendChild(pinned_div3);
-    a.appendChild(pinned_div2);
-    pinned_div1.appendChild(a);
-
-    const pinned_div4 = document.createElement("div");
-    pinned_div4.classList.add(
-      "absolute",
-      "bottom-0",
-      "top-0",
-      "items-center",
-      "gap-1.5",
-      "pr-2",
-      "ltr:right-0",
-      "rtl:left-0",
-      "hidden",
-      "group-hover:flex"
-    );
-
-    const span = document.createElement("span");
-    span.setAttribute("data-state", "closed");
-
-    const button = document.createElement("button");
-    button.classList.add(
-      "flex",
-      "items-center",
-      "justify-center",
-      "text-token-text-primary",
-      "transition",
-      "hover:text-token-text-secondary",
-      "radix-state-open:text-token-text-secondary",
-      "juice:text-token-text-secondary",
-      "juice:hover:text-token-text-primary",
-      "no_event_listener"
-    );
-    button.type = "button";
-    button.title = "Click to remove pinned";
-    button.id = "radix-:r32:";
-    button.setAttribute("aria-haspopup", "menu");
-    button.setAttribute("aria-expanded", "false");
-    button.setAttribute("data-state", "closed");
-    button.innerHTML = getSvg(true);
-
-    span.appendChild(button);
-    pinned_div4.appendChild(span);
-    pinned_div1.appendChild(pinned_div4);
-
-    li.appendChild(pinned_div1);
     this.ol?.appendChild(li);
 
     button.addEventListener("click", () => {

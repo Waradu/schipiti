@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/jquery/dist/jquery.js":
-/*!********************************************!*\
-  !*** ./node_modules/jquery/dist/jquery.js ***!
-  \********************************************/
+/***/ "./node_modules/.pnpm/jquery@3.7.1/node_modules/jquery/dist/jquery.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/.pnpm/jquery@3.7.1/node_modules/jquery/dist/jquery.js ***!
+  \****************************************************************************/
 /***/ (function(module, exports) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10728,10 +10728,10 @@ return jQuery;
 
 /***/ }),
 
-/***/ "./node_modules/toastr/toastr.js":
-/*!***************************************!*\
-  !*** ./node_modules/toastr/toastr.js ***!
-  \***************************************/
+/***/ "./node_modules/.pnpm/toastr@2.1.4/node_modules/toastr/toastr.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/.pnpm/toastr@2.1.4/node_modules/toastr/toastr.js ***!
+  \***********************************************************************/
 /***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -10748,7 +10748,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
  */
 /* global define */
 (function (define) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(/*! jquery */ "./node_modules/.pnpm/jquery@3.7.1/node_modules/jquery/dist/jquery.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function ($) {
         return (function () {
             var $container;
             var listener;
@@ -11218,10 +11218,49 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCustomChatItem: () => (/* binding */ getCustomChatItem),
 /* harmony export */   getSvg: () => (/* binding */ getSvg)
 /* harmony export */ });
 function getSvg(pinned) {
     return "\n    <svg\n      xmlns=\"http://www.w3.org/2000/svg\"\n      width=\"24\"\n      height=\"24\"\n      fill=\"none\"\n      viewBox=\"0 0 24 24\"\n      class=\"h-5 w-5 shrink-0\"\n    >\n      <path\n        ".concat(pinned ? 'fill="currentColor"' : 'stroke="currentColor"', "\n        fill-rule=\"evenodd\"\n        d=\"M16.0592 3.8999H7.95109C6.16898 3.8999 4.70996 5.30644 4.70996 7.02444V18.4376C4.70996 19.8944 5.79382 20.5173 7.11737 19.8039L11.2131 17.6037C11.6508 17.3726 12.3595 17.3726 12.7868 17.6037L16.8825 19.8039C18.2061 20.5173 19.2899 19.8944 19.2899 18.4376V7.02444C19.3003 5.30644 17.8413 3.8999 16.0592 3.8999Z\"\n        stroke-width=\"2\"\n        stroke-linecap=\"round\"\n        stroke-linejoin=\"round\"\n        clip-rule=\"evenodd\"\n      ></path>\n    </svg>\n  ");
+}
+function getCustomChatItem(pinned, link, name) {
+    var li = document.createElement("li");
+    li.classList.add("relative");
+    li.style.opacity = "1";
+    li.style.height = "auto";
+    var pinned_div1 = document.createElement("div");
+    pinned_div1.classList.add("group", "relative", "rounded-lg", "active:opacity-90", "hover:bg-token-sidebar-surface-secondary");
+    var a = document.createElement("a");
+    a.href = link;
+    a.classList.add("flex", "items-center", "gap-2", "p-2");
+    var pinned_div2 = document.createElement("div");
+    pinned_div2.classList.add("relative", "grow", "overflow-hidden", "whitespace-nowrap");
+    pinned_div2.setAttribute("dir", "auto");
+    pinned_div2.innerHTML = name;
+    var pinned_div3 = document.createElement("div");
+    pinned_div3.classList.add("absolute", "bottom-0", "top-0", "to-transparent", "ltr:right-0", "ltr:bg-gradient-to-l", "rtl:left-0", "rtl:bg-gradient-to-r", "from-token-sidebar-surface-primary", "group-hover:from-token-sidebar-surface-secondary", "w-8", "group-hover:w-20", "group-hover:from-60%", "juice:group-hover:w-10");
+    pinned_div2.appendChild(pinned_div3);
+    a.appendChild(pinned_div2);
+    pinned_div1.appendChild(a);
+    var pinned_div4 = document.createElement("div");
+    pinned_div4.classList.add("absolute", "bottom-0", "top-0", "items-center", "gap-1.5", "pr-2", "ltr:right-0", "rtl:left-0", "hidden", "group-hover:flex");
+    var span = document.createElement("span");
+    span.setAttribute("data-state", "closed");
+    var button = document.createElement("button");
+    button.classList.add("flex", "items-center", "justify-center", "text-token-text-primary", "transition", "hover:text-token-text-secondary", "radix-state-open:text-token-text-secondary", "juice:text-token-text-secondary", "juice:hover:text-token-text-primary", "no_event_listener");
+    button.type = "button";
+    button.title = "Click to remove pinned";
+    button.id = "radix-:r32:";
+    button.setAttribute("aria-haspopup", "menu");
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("data-state", "closed");
+    button.innerHTML = getSvg(pinned);
+    span.appendChild(button);
+    pinned_div4.appendChild(span);
+    pinned_div1.appendChild(pinned_div4);
+    li.appendChild(pinned_div1);
+    return [li, button];
 }
 
 
@@ -11256,6 +11295,7 @@ var Nav = /** @class */ (function () {
         if (!list)
             return;
         this.group = document.createElement("div");
+        this.group.classList.add("pinned");
         list.appendChild(this.group);
         var div1 = document.createElement("div");
         div1.classList.add("relative", "empty:mt-0", "empty:hidden", "juice:first:mt-0", "wrdu_border");
@@ -11309,41 +11349,7 @@ var Nav = /** @class */ (function () {
         if (!this.ol)
             return;
         this.show();
-        var li = document.createElement("li");
-        li.classList.add("relative");
-        li.style.opacity = "1";
-        li.style.height = "auto";
-        var pinned_div1 = document.createElement("div");
-        pinned_div1.classList.add("group", "relative", "rounded-lg", "active:opacity-90", "hover:bg-token-sidebar-surface-secondary");
-        var a = document.createElement("a");
-        a.href = link;
-        a.classList.add("flex", "items-center", "gap-2", "p-2");
-        var pinned_div2 = document.createElement("div");
-        pinned_div2.classList.add("relative", "grow", "overflow-hidden", "whitespace-nowrap");
-        pinned_div2.setAttribute("dir", "auto");
-        pinned_div2.innerHTML = name;
-        var pinned_div3 = document.createElement("div");
-        pinned_div3.classList.add("absolute", "bottom-0", "top-0", "to-transparent", "ltr:right-0", "ltr:bg-gradient-to-l", "rtl:left-0", "rtl:bg-gradient-to-r", "from-token-sidebar-surface-primary", "group-hover:from-token-sidebar-surface-secondary", "w-8", "group-hover:w-20", "group-hover:from-60%", "juice:group-hover:w-10");
-        pinned_div2.appendChild(pinned_div3);
-        a.appendChild(pinned_div2);
-        pinned_div1.appendChild(a);
-        var pinned_div4 = document.createElement("div");
-        pinned_div4.classList.add("absolute", "bottom-0", "top-0", "items-center", "gap-1.5", "pr-2", "ltr:right-0", "rtl:left-0", "hidden", "group-hover:flex");
-        var span = document.createElement("span");
-        span.setAttribute("data-state", "closed");
-        var button = document.createElement("button");
-        button.classList.add("flex", "items-center", "justify-center", "text-token-text-primary", "transition", "hover:text-token-text-secondary", "radix-state-open:text-token-text-secondary", "juice:text-token-text-secondary", "juice:hover:text-token-text-primary", "no_event_listener");
-        button.type = "button";
-        button.title = "Click to remove pinned";
-        button.id = "radix-:r32:";
-        button.setAttribute("aria-haspopup", "menu");
-        button.setAttribute("aria-expanded", "false");
-        button.setAttribute("data-state", "closed");
-        button.innerHTML = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getSvg)(true);
-        span.appendChild(button);
-        pinned_div4.appendChild(span);
-        pinned_div1.appendChild(pinned_div4);
-        li.appendChild(pinned_div1);
+        var _b = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getCustomChatItem)(true, link, name), li = _b[0], button = _b[1];
         (_a = this.ol) === null || _a === void 0 ? void 0 : _a.appendChild(li);
         button.addEventListener("click", function () {
             chrome.storage.sync.get(["pinned"]).then(function (result) {
@@ -11375,6 +11381,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Observer: () => (/* binding */ Observer)
 /* harmony export */ });
 /* harmony import */ var _html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./html */ "./script/html.ts");
+/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search */ "./script/search.ts");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
@@ -11385,8 +11428,11 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 
+
 var Observer = /** @class */ (function () {
-    function Observer(pinned_links, nav) {
+    function Observer(pinned_links, nav, index) {
+        var _this = this;
+        var search = new _search__WEBPACK_IMPORTED_MODULE_1__.Search(index);
         var applyLinkFunctionality = function (item) {
             if (!item) {
                 return;
@@ -11398,6 +11444,11 @@ var Observer = /** @class */ (function () {
             var link = linkElement.href;
             var name = linkElement.querySelector('div[dir="auto"]').innerText;
             var pinned = pinned_links.some(function (l) { return l.link === link; });
+            var indexItem = {
+                name: name,
+                link: link.replace("https://chatgpt.com/c/", ""),
+            };
+            search.add(indexItem);
             var waitForButton = function (item, callback, interval, timeout) {
                 if (interval === void 0) { interval = 100; }
                 if (timeout === void 0) { timeout = 5000; }
@@ -11463,27 +11514,43 @@ var Observer = /** @class */ (function () {
             });
         };
         // Create a MutationObserver to watch for new items
-        var observer = new MutationObserver(function (mutations) {
-            mutations.forEach(function (mutation) {
-                mutation.addedNodes.forEach(function (node) {
-                    if (node.nodeType === 1 &&
-                        node instanceof HTMLElement &&
-                        node.matches("ol>li>.group:has(a)")) {
-                        applyLinkFunctionality(node);
-                    }
-                    if (node.nodeType === 1 &&
-                        node instanceof HTMLElement &&
-                        node.querySelectorAll) {
-                        var nestedItems = node.querySelectorAll("ol>li>.group:has(a)");
-                        nestedItems.forEach(function (nestedItem) {
-                            if (nestedItem instanceof HTMLElement) {
-                                applyLinkFunctionality(nestedItem);
-                            }
+        var observer = new MutationObserver(function (mutations) { return __awaiter(_this, void 0, void 0, function () {
+            var sync;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        sync = false;
+                        mutations.forEach(function (mutation) {
+                            mutation.addedNodes.forEach(function (node) {
+                                if (node.nodeType === 1 &&
+                                    node instanceof HTMLElement &&
+                                    node.matches("ol>li>.group:has(a)")) {
+                                    applyLinkFunctionality(node);
+                                    sync = true;
+                                }
+                                if (node.nodeType === 1 &&
+                                    node instanceof HTMLElement &&
+                                    node.querySelectorAll) {
+                                    var nestedItems = node.querySelectorAll("ol>li>.group:has(a)");
+                                    nestedItems.forEach(function (nestedItem) {
+                                        if (nestedItem instanceof HTMLElement) {
+                                            applyLinkFunctionality(nestedItem);
+                                            sync = true;
+                                        }
+                                    });
+                                }
+                            });
                         });
-                    }
-                });
+                        console.log(sync);
+                        if (!sync) return [3 /*break*/, 2];
+                        return [4 /*yield*/, search.sync()];
+                    case 1:
+                        _a.sent();
+                        _a.label = 2;
+                    case 2: return [2 /*return*/];
+                }
             });
-        });
+        }); });
         // Start observing the document for changes in child elements
         observer.observe(document.body, { childList: true, subtree: true });
         // Apply to existing items
@@ -11511,6 +11578,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Search: () => (/* binding */ Search)
 /* harmony export */ });
+/* harmony import */ var _html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./html */ "./script/html.ts");
+/* harmony import */ var _toast__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toast */ "./script/toast.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -11547,61 +11616,109 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+
+
 var Search = /** @class */ (function () {
-    function Search() {
+    function Search(items) {
+        var _this = this;
         this.items = [];
-        this.fetches = 10;
+        this.group = null;
+        this.chats = null;
+        this.results = null;
+        console.log(items);
+        this.items = items;
         var nav = document.querySelector("nav");
         if (!nav) {
-            toastr.error("Nav not found");
+            _toast__WEBPACK_IMPORTED_MODULE_1__["default"].error("Nav not found");
             return;
         }
         var list = nav.querySelector("div.flex-col.flex-1.transition-opacity.duration-500.-mr-2.pr-2.overflow-y-auto > div.flex.flex-col.gap-2.pb-2.text-token-text-primary.text-sm.juice\\:mt-5");
         if (!list) {
-            toastr.error("List not found");
+            _toast__WEBPACK_IMPORTED_MODULE_1__["default"].error("List not found");
             return;
         }
+        this.group = list.querySelector("div.pinned");
+        if (!this.group) {
+            _toast__WEBPACK_IMPORTED_MODULE_1__["default"].error("Pinned group not found");
+            return;
+        }
+        this.results = document.createElement("div");
+        this.results.classList.add("results");
+        list.insertBefore(this.results, list.firstChild);
+        var div1 = document.createElement("div");
+        div1.classList.add("relative", "empty:mt-0", "empty:hidden", "juice:first:mt-0", "wrdu_border");
+        div1.style.height = "auto";
+        div1.style.opacity = "1";
+        var div2 = document.createElement("div");
+        div2.classList.add("juice:sticky", "juice:top-0", "juice:z-20", "juice:bg-token-sidebar-surface-primary");
+        var span = document.createElement("span");
+        span.classList.add("flex", "h-9", "items-center");
+        var input = document.createElement("input");
+        input.classList.add("pb-2", "pt-2", "px-2", "text-xs", "font-semibold", "text-ellipsis", "overflow-hidden", "break-all", "text-token-text-secondary", "wrdu_input");
+        input.type = "text";
+        input.placeholder = "Search...";
+        var ol = document.createElement("ol");
+        span.appendChild(input);
+        div2.appendChild(span);
+        div1.appendChild(div2);
+        div1.appendChild(ol);
+        input.addEventListener("input", function (event) {
+            var target = event.target;
+            _this.chats = list.querySelector("div:not([class])");
+            if (!_this.chats) {
+                _toast__WEBPACK_IMPORTED_MODULE_1__["default"].error("Chats not found");
+                return;
+            }
+            console.log("c");
+            if (!target || !_this.chats)
+                return;
+            var text = target.value;
+            console.log("t");
+            if (text == "") {
+                ol.innerHTML = "";
+                _this.chats.style.display = "block";
+            }
+            else {
+                console.log("e");
+                ol.innerHTML = "";
+                _this.chats.style.display = "none";
+                var _a = (0,_html__WEBPACK_IMPORTED_MODULE_0__.getCustomChatItem)(false, text, ""), li = _a[0], button = _a[1];
+                ol.appendChild(li);
+            }
+        });
+        this.results.appendChild(div1);
     }
-    Search.prototype.init = function () {
+    Search.prototype.add = function (item) {
+        var existingItemIndex = this.items.findIndex(function (existingItem) { return existingItem.link === item.link; });
+        if (existingItemIndex !== -1) {
+            this.items[existingItemIndex] = item;
+        }
+        else {
+            this.items.push(item);
+        }
+    };
+    Search.prototype.sync = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var requests, _loop_1, offset, jsonResponses;
-            var _this = this;
+            var chunks, chunkSize, i, storagePromises;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        requests = [];
-                        _loop_1 = function (offset) {
-                            console.log(offset * 100);
-                            requests.push(fetch("https://chatgpt.com/backend-api/conversations?offset=".concat(offset * 100, "&limit=100&order=updated"), {
-                                headers: {
-                                    Authorization: "xxx",
-                                },
-                            })
-                                .then(function (res) { return res.json(); })
-                                .catch(function (error) {
-                                console.error("Fetch error for offset ".concat(offset * 100, ":"), error);
-                                return null;
-                            }));
-                        };
-                        for (offset = 0; offset < this.fetches; offset += 1) {
-                            _loop_1(offset);
+                        if (this.items.length > 1000) {
+                            this.items = this.items.slice(this.items.length - 1000);
                         }
-                        return [4 /*yield*/, Promise.all(requests)];
-                    case 1:
-                        jsonResponses = _a.sent();
-                        jsonResponses.forEach(function (json) {
-                            if (json) {
-                                json.items.forEach(function (item) {
-                                    var existingItemIndex = _this.items.findIndex(function (existingItem) { return existingItem.id === item.id; });
-                                    if (existingItemIndex !== -1) {
-                                        _this.items[existingItemIndex] = item;
-                                    }
-                                    else {
-                                        _this.items.push(item);
-                                    }
-                                });
-                            }
+                        chunks = [];
+                        chunkSize = 90;
+                        for (i = 0; i < this.items.length; i += chunkSize) {
+                            chunks.push(this.items.slice(i, i + chunkSize));
+                        }
+                        storagePromises = chunks.map(function (chunk, index) {
+                            var _a;
+                            return chrome.storage.sync.set((_a = {}, _a["index_".concat(index)] = chunk, _a));
                         });
+                        return [4 /*yield*/, Promise.all(storagePromises)];
+                    case 1:
+                        _a.sent();
+                        console.log("synced", this.items);
                         return [2 /*return*/];
                 }
             });
@@ -11625,7 +11742,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
+/* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! toastr */ "./node_modules/.pnpm/toastr@2.1.4/node_modules/toastr/toastr.js");
 /* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(toastr__WEBPACK_IMPORTED_MODULE_0__);
 
 (toastr__WEBPACK_IMPORTED_MODULE_0___default().options) = {
@@ -11727,7 +11844,6 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nav */ "./script/nav.ts");
 /* harmony import */ var _observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./observer */ "./script/observer.ts");
-/* harmony import */ var _search__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./search */ "./script/search.ts");
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -11766,22 +11882,47 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 };
 
 
-
-chrome.storage.sync.get(["pinned", "index"]).then(function (result) { return __awaiter(void 0, void 0, void 0, function () {
-    var pinned_links, nav, observer, search;
-    return __generator(this, function (_a) {
-        if (typeof result.pinned === "undefined") {
-            chrome.storage.sync.set({ pinned: [] });
-        }
-        pinned_links = result.pinned;
-        nav = new _nav__WEBPACK_IMPORTED_MODULE_0__.Nav(pinned_links);
-        observer = new _observer__WEBPACK_IMPORTED_MODULE_1__.Observer(pinned_links, nav);
-        search = new _search__WEBPACK_IMPORTED_MODULE_2__.Search();
-        /* await search.init(); */
-        console.log(search.items);
-        return [2 /*return*/];
-    });
-}); });
+console.log("Started");
+document.addEventListener("DOMContentLoaded", function () {
+    var _this = this;
+    console.log("DOMContentLoaded");
+    chrome.storage.sync.get(["pinned"]).then(function (result) { return __awaiter(_this, void 0, void 0, function () {
+        var pinned_links, allKeys, indexKeys, indexChunks, combinedIndex, nav, observer;
+        var _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    if (typeof result.pinned === "undefined") {
+                        chrome.storage.sync.set({ pinned: [] });
+                        result.pinned = [];
+                    }
+                    pinned_links = result.pinned;
+                    console.log(pinned_links);
+                    return [4 /*yield*/, new Promise(function (resolve) {
+                            chrome.storage.sync.get(null, function (items) {
+                                resolve(Object.keys(items));
+                            });
+                        })];
+                case 1:
+                    allKeys = _b.sent();
+                    indexKeys = allKeys.filter(function (key) {
+                        return key.startsWith("index_");
+                    });
+                    return [4 /*yield*/, new Promise(function (resolve) {
+                            chrome.storage.sync.get(indexKeys, function (items) {
+                                resolve(indexKeys.map(function (key) { return items[key]; }));
+                            });
+                        })];
+                case 2:
+                    indexChunks = _b.sent();
+                    combinedIndex = (_a = []).concat.apply(_a, indexChunks);
+                    nav = new _nav__WEBPACK_IMPORTED_MODULE_0__.Nav(pinned_links);
+                    observer = new _observer__WEBPACK_IMPORTED_MODULE_1__.Observer(pinned_links, nav, combinedIndex);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+});
 
 })();
 
