@@ -11627,6 +11627,7 @@ var Search = /** @class */ (function () {
         this.results = null;
         console.log(items);
         this.items = items;
+        return;
         var nav = document.querySelector("nav");
         if (!nav) {
             _toast__WEBPACK_IMPORTED_MODULE_1__["default"].error("Nav not found");
